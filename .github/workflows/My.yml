@@ -16,22 +16,22 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y bc bison build-essential ccache curl flex git gnupg \
-            libncurses5-dev libssl-dev libelf-dev lzop python3 rsync unzip wget zip zlib1g-dev
+            libncurses5-dev libssl-dev libelf-dev lzop python3 rsync unzip wget zip zlib1g-dev \
+            gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi
 
-      - name: Download Google Clang
+      - name: Download Clang 18 (Google-based via Neutron)
         run: |
           mkdir clang
-          wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r518813.tar.gz
-          tar -C clang -xf clang-r518813.tar.gz
+          wget -q https://github.com/Neutron-Toolchains/clang-builds/releases/download/18.1.3/Clang-18.1.3.tar.gz
+          tar -xf Clang-18.1.3.tar.gz -C clang --strip-components=1
 
       - name: Set Environment Variables
         run: |
-          echo "CLANG_PATH=${GITHUB_WORKSPACE}/clang" >> $GITHUB_ENV
           echo "ARCH=arm64" >> $GITHUB_ENV
           echo "SUBARCH=arm64" >> $GITHUB_ENV
-          echo "PATH=${GITHUB_WORKSPACE}/clang/bin:$PATH" >> $GITHUB_ENV
           echo "KBUILD_BUILD_USER=GitHubCI" >> $GITHUB_ENV
           echo "KBUILD_BUILD_HOST=github" >> $GITHUB_ENV
+          echo "${GITHUB_WORKSPACE}/clang/bin" >> $GITHUB_PATH
 
       - name: Build Kernel
         run: |
