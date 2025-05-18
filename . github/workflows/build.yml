@@ -1,0 +1,16 @@
+name: Build Kernel - Xiaomi xuanyuan (Bezel)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build xuanyuan Kernel using Bezel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Kernel Source
+        uses: actions/checkout@v3
+
+      - name: Run Bezel Kernel Builder
+        uses: kevlatus/bezel@v1
