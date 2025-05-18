@@ -19,20 +19,11 @@ jobs:
             libncurses5-dev libssl-dev libelf-dev lzop python3 rsync unzip wget zip zlib1g-dev \
             gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi
 
-      - name: Download Clang 18 (via Neutron)
+      - name: Download Android Clang Prebuilt
         run: |
           mkdir clang
-          echo "Downloading Clang 18.1.3..."
-          curl -L -o Clang-18.1.3.tar.gz https://github.com/Neutron-Toolchains/clang-builds/releases/download/18.1.3/Clang-18.1.3.tar.gz
-
-          echo "Verifying archive..."
-          if ! file Clang-18.1.3.tar.gz | grep -q 'gzip compressed'; then
-            echo "ERROR: Clang archive is corrupted or invalid!"
-            exit 1
-          fi
-
-          echo "Extracting Clang..."
-          tar -xf Clang-18.1.3.tar.gz -C clang --strip-components=1
+          curl -L -o clang.tar.gz https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r450784d.tar.gz
+          tar -xf clang.tar.gz -C clang
 
       - name: Set Environment Variables
         run: |
