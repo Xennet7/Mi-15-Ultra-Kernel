@@ -1,16 +1,52 @@
-name: Build Kernel - Xiaomi xuanyuan (Bezel)
+name: Build Kernel - Xiaomi xuanyuan
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build xuanyuan Kernel using Bezel
-    runs-on: ubuntu-latest
+    name: Build xuanyuan Kernel
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout Kernel Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Run Bezel Kernel Builder
-        uses: kevlatus/bezel@v1
+      - name: Set up Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y bc bison build-essential ccache curl flex git gnupg \
+            libncurses5-dev libssl-dev libelf-dev lzop python3 rsync unzip wget zip zlib1g-dev
+
+      - name: Download Google Clang
+        run: |
+          mkdir clang
+          wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r518813.tar.gz
+          tar -C clang -xf clang-r518813.tar.gz
+
+      - name: Set Environment Variables
+        run: |
+          echo "CLANG_PATH=${GITHUB_WORKSPACE}/clang" >> $GITHUB_ENV
+          echo "ARCH=arm64" >> $GITHUB_ENV
+          echo "SUBARCH=arm64" >> $GITHUB_ENV
+          echo "PATH=${GITHUB_WORKSPACE}/clang/bin:$PATH" >> $GITHUB_ENV
+          echo "KBUILD_BUILD_USER=GitHubCI" >> $GITHUB_ENV
+          echo "KBUILD_BUILD_HOST=github" >> $GITHUB_ENV
+
+      - name: Build Kernel
+        run: |
+          make O=out ARCH=arm64 vendor/xuanyuan_defconfig
+          make -j$(nproc) O=out \
+            ARCH=arm64 \
+            CC=clang \
+            CROSS_COMPILE=aarch64-linux-gnu- \
+            CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+            LLVM=1
+
+      - name: Upload Kernel Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: xuanyuan-kernel
+          path: |
+            out/arch/arm64/boot/Image*
+            out/arch/arm64/boot/dtbo.img
