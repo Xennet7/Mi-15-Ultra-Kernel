@@ -1,0 +1,16 @@
+name: Xiaomi xuanyuan (SM8750)
+
+kernel:
+  source:
+    url: https://github.com/MiCode/Xiaomi_Kernel_OpenSource
+    branch: xuanyuan-v-oss
+  defconfig: vendor/xuanyuan_defconfig
+
+toolchain:
+  clang: google
+  version: r518813  # Clang 18, stable and compatible with SM8750
+
+upload:
+  artifacts:
+    - out/arch/arm64/boot/Image*
+    - out/arch/arm64/boot/dtbo.img
