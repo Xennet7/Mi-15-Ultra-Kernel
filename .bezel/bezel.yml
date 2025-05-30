@@ -13,4 +13,4 @@ toolchain:
 upload:
   artifacts:
     - out/arch/arm64/boot/Image*
-    - out/arch/arm64/boot/dtbo.img
+    - out/arch/arm64/booto.img
