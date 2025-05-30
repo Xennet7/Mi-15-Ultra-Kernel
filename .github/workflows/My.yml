@@ -8,7 +8,7 @@ jobs:
     name: Build xuanyuan Kernel
     steps:
       - name: Checkout Kernel Source
-        uses: actions/checkout@v4
+        uses: actionsckout@v4
 
       - name: Set up Dependencies
         run: |
