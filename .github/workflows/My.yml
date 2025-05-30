@@ -27,7 +27,7 @@ jobs:
       - name: Set Environment Variables
         run: |
           echo "ARCH=arm> $GITHUB_ENV
-          echo "SUBARCH=arm64" >> $GITHUB_ENV
+          echo "SUBARCH=ar >> $GITHUB_ENV
           echo "KBUILD_BUILD_USER=GitHubCI" >> $GITHUB_ENV
           echo "KBUILD_BUILD_HOST=github" >> $GITHUB_ENV
           echo "${GITHUB_WORKSPACE}/clang/bin" >> $GITHUB_PATH
