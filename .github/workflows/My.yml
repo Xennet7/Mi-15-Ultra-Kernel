@@ -18,7 +18,7 @@ jobs:
             gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi
 
       - name: Download Clang 18.1.3 (Neutron)
-        run: |
+        r
           mkdir clang
           curl -L -o Clang-1
           
