@@ -3,7 +3,7 @@ name: Xiaomi xuanyuan (SM8750)
 kernel:
   source:
     url: https://github.com/MiCode/Xiaomi_Kernel_OpenSource
-    branch: xuanyuan-v-oss
+    branch: xuanyuan-v-oss xennet
   defconfig: vendor/xuanyuan_defconfig
 
 toolchain:
