@@ -14,7 +14,7 @@ jobs:
 
       - name: Set up Dependencies
         run: |
-          sudo apt update
+          sudo apt up
           sudo apt install -y bc bison build-essential ccache curl flex git gnupg \
             libncurses5-dev libssl-dev libelf-dev lzop python3 rsync unzip wget zip zlib1g-dev \
             gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi
