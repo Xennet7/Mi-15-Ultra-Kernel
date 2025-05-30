@@ -1,7 +1,7 @@
 name: Build Kernel - Xiaomi xuanyuan
 
 on:
-  workflow_disp
+  workflow_d
 
 jobs:
   build:
