@@ -11,6 +11,6 @@ toolchain:
   version: r518813  # Clang 18, stable and compatible with SM8750
 
 upload:
-  artifacts:
+  artifa
     - out/arch/arm64/boot/Image*
     - out/arch/arm64/booto.img
