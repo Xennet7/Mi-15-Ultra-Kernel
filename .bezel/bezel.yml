@@ -4,7 +4,7 @@ kern
   source:
     url: https://github.com/MiCode/Xiaomi_Kernel_OpenSource
     branch: xuanyuan-v-oss xennet
-  defconfig: vendor/xuaan_defconfig
+  defconfig: vendor/xuefconfig
 
 toolchain:
   clang: google
