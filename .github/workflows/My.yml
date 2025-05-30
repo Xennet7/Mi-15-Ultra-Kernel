@@ -6,8 +6,6 @@ on:
 jobs:
   build:
     name: Build xuanyuan Kernel
-    runs-on: ubuntu-22.04
-
     steps:
       - name: Checkout Kernel Source
         uses: actions/checkout@v4
